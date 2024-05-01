@@ -29,7 +29,9 @@ export class ProductsComponent {
 
   private readonly viewModel = computed(() => {
     return {
-      products: this.products().filter(product => product.name.toLowerCase().includes(this.searchTerm().toLowerCase()) || product.description.toLowerCase().includes(this.searchTerm().toLowerCase())),
+      products: this.products().filter(product => 
+        product.name.toLowerCase().includes(this.searchTerm().toLowerCase()) 
+        || product.description.toLowerCase().includes(this.searchTerm().toLowerCase())),
       loading: this.loading(),
       error: this.error()
     }

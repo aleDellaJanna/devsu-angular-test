@@ -65,11 +65,11 @@ describe('ProductsComponent', () => {
     // mockFinancialProductsState.products()
     console.log(component.vm)
     // fixture.detectChanges();
-    const items = fixture.debugElement.queryAll(By.css('.product-item'));
+    const items = fixture.debugElement.queryAll(By.css('[data-test="product-item"]'));
     expect(items.length).toEqual(2)
     component.searchTerm.set(searchTerm);
     fixture.detectChanges()
-    const itemsB = fixture.debugElement.queryAll(By.css('.product-item'));
+    const itemsB = fixture.debugElement.queryAll(By.css('[data-test="product-item"]'));
     expect(itemsB.length).toEqual(1)
     
   })

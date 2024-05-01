@@ -52,7 +52,7 @@
                     </tr>
                 } 
                     @for (product of vm.products; track product.id) {
-                        <tr class="product-item">
+                        <tr data-test="product-item">
                             <td class="logo">
                                 <img [src]="product.logo?product.logo:'/assets/no-image.svg'" [alt]="'Imagen del producto '+product.name">
                             </td>
@@ -67,14 +67,12 @@
                             </td>
                             <td>{{product.date_revision | date: 'dd/MM/YYYY'}}</td>
                             <td class="edit-delete-btn">
-                                <!-- <button style="background: transparent;"> -->
                                     <i class="fa fa-ellipsis-vertical "></i>
-                                <!-- </button> -->
                             </td>
                         </tr>
                     }@empty {
                         <tr>
-                            <td colspan="4">No productos disponibles</td>
+                            <td colspan="4">No hay productos disponibles</td>
                         </tr>
                     }
                 
