@@ -4,35 +4,38 @@ import { FinancialProductsService } from '../../../data-access-financial-product
 import { FinancialProductsState } from '../../../data-access-financial-products/financial-products.state';
 import { DatePipe, JsonPipe } from '@angular/common';
 import { InputUiComponent } from '../../../shared/ui-design-system/form/input-ui.component';
+import { FormsModule } from '@angular/forms';
+import { SearchBarComponent } from '../../ui-components/search-bar/search-bar.component';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [JsonPipe, InputUiComponent, DatePipe],
+  imports: [JsonPipe, InputUiComponent, DatePipe, FormsModule, SearchBarComponent],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss'
 })
 export class ProductsComponent {
 
   private readonly fincialProductsState = inject(FinancialProductsState);
-  protected products = computed(()=>this.fincialProductsState.products());
-  protected loading = computed(()=>this.fincialProductsState.loading());
-  protected error = computed(()=>this.fincialProductsState.error());
 
+  protected products = computed(() => this.fincialProductsState.products());
+  protected loading = computed(() => this.fincialProductsState.loading());
+  protected error = computed(() => this.fincialProductsState.error());
 
-  constructor(){
+  searchTerm = signal('');
+  constructor() {
     this.fincialProductsState.getFinancialProducts();
   }
 
-  private readonly viewModel = computed(()=>{
+  private readonly viewModel = computed(() => {
     return {
-      products: this.products(),
+      products: this.products().filter(product => product.name.toLowerCase().includes(this.searchTerm().toLowerCase()) || product.description.toLowerCase().includes(this.searchTerm().toLowerCase())),
       loading: this.loading(),
       error: this.error()
     }
   })
 
-  protected get vm(){
+  public get vm() {
     return this.viewModel();
   }
 }

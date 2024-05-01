@@ -1,39 +1,36 @@
 <div class="container">
     <div class="inner-container">
-        <div class="search-bar">
-            <input devsu-input class="search-bar" type="text" placeholder="Buscar Producto">
-        </div>
+        <div class="search-bar-container">
+<search-bar label="Producto" (searchTermChanged)="searchTerm.set($event)"/>   
+     </div>
         <div class="table-container">
 
         <table>
             <thead>
                 <tr>
                     <th>
-
                         Logo
                     </th>
-           
                     <th>
-
                         Nombre del producto
                         <i class="fa fa-circle-info"></i>
                     </th>
                     <th>
-
                         Descripccion
                         <i class="fa fa-circle-info"></i>
 
                     </th>
                     <th>
-
                         Fecha de liberación
                         <i class="fa fa-circle-info"></i>
 
                     </th>
                     <th>
-
                         Fecha de restructuración
                         <i class="fa fa-circle-info"></i>
+
+                    </th>
+                    <th>
 
                     </th>
                 </tr>
@@ -55,7 +52,7 @@
                     </tr>
                 } 
                     @for (product of vm.products; track product.id) {
-                        <tr>
+                        <tr class="product-item">
                             <td class="logo">
                                 <img [src]="product.logo?product.logo:'/assets/no-image.svg'" [alt]="'Imagen del producto '+product.name">
                             </td>
@@ -69,6 +66,15 @@
                                 {{product.date_release | date: 'dd/MM/YYYY'}}
                             </td>
                             <td>{{product.date_revision | date: 'dd/MM/YYYY'}}</td>
+                            <td class="edit-delete-btn">
+                                <!-- <button style="background: transparent;"> -->
+                                    <i class="fa fa-ellipsis-vertical "></i>
+                                <!-- </button> -->
+                            </td>
+                        </tr>
+                    }@empty {
+                        <tr>
+                            <td colspan="4">No productos disponibles</td>
                         </tr>
                     }
                 

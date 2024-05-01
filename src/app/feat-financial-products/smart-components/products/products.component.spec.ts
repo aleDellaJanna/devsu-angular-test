@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProductsComponent } from './products.component';
 import { FinancialProductsState } from '../../../data-access-financial-products/financial-products.state';
+import { By } from '@angular/platform-browser';
 
 describe('ProductsComponent', () => {
   let component: ProductsComponent;
@@ -11,7 +12,7 @@ describe('ProductsComponent', () => {
   const mockProduct =
   {
     id: "321321",
-    name: "Portatil Hp",
+    name: "Peluqueria",
     description: "Core i5 10 generacion",
     logo: "https://www.mastercard.es/content/dam/public/mastercardcom/eu/es/images/Consumidores/escoge-tu-tarjeta/credito/credito-world/1280x720-mc-sym-card-wrld-ci-5BIN-mm.png",
     date_release: "2024-04-30T00:00:00.000+00:00",
@@ -20,7 +21,7 @@ describe('ProductsComponent', () => {
   const mockProductB =
   {
     id: "121321",
-    name: "Portatil Hp 2",
+    name: "Cualca",
     description: "Core i5 10 generacion",
     logo: "https://www.mastercard.es/content/dam/public/mastercardcom/eu/es/images/Consumidores/escoge-tu-tarjeta/credito/credito-world/1280x720-mc-sym-card-wrld-ci-5BIN-mm.png",
     date_release: "2024-04-30T00:00:00.000+00:00",
@@ -42,8 +43,8 @@ describe('ProductsComponent', () => {
         }
       ]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(ProductsComponent);
     mockFinancialProductsState = TestBed.inject(FinancialProductsState);
     component = fixture.componentInstance;
@@ -54,8 +55,22 @@ describe('ProductsComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should initially call getFinancialProducts from FinancialProductsState', ()=>{
+  it('should initially call getFinancialProducts from FinancialProductsState', () => {
     expect(mockFinancialProductsState.getFinancialProducts).toHaveBeenCalled();
 
+  });
+
+  it('should filter the products list when searchTerm gets a new value', () => {
+    const searchTerm = mockProduct.name;
+    // mockFinancialProductsState.products()
+    console.log(component.vm)
+    // fixture.detectChanges();
+    const items = fixture.debugElement.queryAll(By.css('.product-item'));
+    expect(items.length).toEqual(2)
+    component.searchTerm.set(searchTerm);
+    fixture.detectChanges()
+    const itemsB = fixture.debugElement.queryAll(By.css('.product-item'));
+    expect(itemsB.length).toEqual(1)
+    
   })
 });

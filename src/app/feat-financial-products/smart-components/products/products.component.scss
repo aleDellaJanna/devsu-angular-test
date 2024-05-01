@@ -6,10 +6,6 @@
 
 }
 
-.search-bar{
-    width: 230px;
-}
-
 i{
     color: #808080;
 }
@@ -27,6 +23,9 @@ i{
 
 
 
+}
+.search-bar-container{
+    width: 230px;
 }
 th{
     // text-align: left !important;
@@ -60,3 +59,28 @@ td{
 
 }
 
+.pagination {
+    margin-top: 20px;
+    overflow: auto;
+}
+.pagination button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+    float: left;
+    margin-left: 5px;
+}
+.pagination button.active {
+    background-color: #45a049;
+}
+
+
+.edit-delete-btn:hover{
+    cursor: pointer;
+    i{
+
+        color: black;
+    }
+}
