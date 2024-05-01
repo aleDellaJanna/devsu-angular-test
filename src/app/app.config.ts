@@ -2,13 +2,14 @@ import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HttpHeadersIntercpetor } from './shared/ui-design-system/form/util-http-intercpetor/http-header.intercpetor';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes),
-    importProvidersFrom([
-      HttpClientModule
-
-    ])
+  { provide: HTTP_INTERCEPTORS, useClass: HttpHeadersIntercpetor, multi: true },
+  importProvidersFrom([
+    HttpClientModule
+  ])
   ]
 };

@@ -14,11 +14,9 @@ export class FinancialProductsService {
   constructor() { }
 
   get(){
-    return this.http.get<FinancialProduct[]>(`${this.baseUrl}`, {
-      headers: {
-        'authorId': '1'
-      }
-    }).pipe(
+    return this.http.get<FinancialProduct[]>(`${this.baseUrl}`).pipe(
+
+      tap(data=>console.log(data)),
       catchError(this.handleError)
     )
   }

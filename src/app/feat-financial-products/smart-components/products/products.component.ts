@@ -16,8 +16,8 @@ export class ProductsComponent {
 
   private readonly fincialProductsState = inject(FinancialProductsState);
   protected products = computed(()=>this.fincialProductsState.products());
-  protected loading = computed(()=>this.fincialProductsState.loading())
-  protected error = computed(()=>this.fincialProductsState.error())
+  protected loading = computed(()=>this.fincialProductsState.loading());
+  protected error = computed(()=>this.fincialProductsState.error());
 
 
   constructor(){
