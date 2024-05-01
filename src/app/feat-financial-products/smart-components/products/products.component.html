@@ -1,1 +1,81 @@
-<p>products works!</p>
+<div class="container">
+    <div class="inner-container">
+        <div class="search-bar">
+            <input devsu-input class="search-bar" type="text" placeholder="Buscar Producto">
+        </div>
+        <div class="table-container">
+
+        <table>
+            <thead>
+                <tr>
+                    <th>
+
+                        Logo
+                    </th>
+           
+                    <th>
+
+                        Nombre del producto
+                        <i class="fa fa-circle-info"></i>
+                    </th>
+                    <th>
+
+                        Descripccion
+                        <i class="fa fa-circle-info"></i>
+
+                    </th>
+                    <th>
+
+                        Fecha de liberación
+                        <i class="fa fa-circle-info"></i>
+
+                    </th>
+                    <th>
+
+                        Fecha de restructuración
+                        <i class="fa fa-circle-info"></i>
+
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (vm.loading) {
+                    <tr style="font-size: 1.4rem;">
+
+                        Cargando...
+                    </tr>
+                } 
+                @if (vm.error) {
+                    <tr style="font-size: 1.4rem;">
+
+                        <td colspan="4">
+
+                            {{vm.error}}
+                        </td>
+                    </tr>
+                } 
+                    @for (product of vm.products; track product.id) {
+                        <tr>
+                            <td class="logo">
+                                <img [src]="product.logo?product.logo:'/assets/no-image.svg'" [alt]="'Imagen del producto '+product.name">
+                            </td>
+                            <td>
+                                {{product.name}}
+                            </td>
+                            <td>
+                                {{product.description}}
+                            </td>
+                            <td>
+                                {{product.date_release | date: 'dd/MM/YYYY'}}
+                            </td>
+                            <td>{{product.date_revision | date: 'dd/MM/YYYY'}}</td>
+                        </tr>
+                    }
+                
+            </tbody>
+        </table>
+    </div>
+
+    </div>
+
+</div>
