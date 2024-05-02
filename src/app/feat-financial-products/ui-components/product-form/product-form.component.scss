@@ -1,0 +1,26 @@
+span{
+    margin-left: 8px;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 500;
+}
+
+form{
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    border-top: 1px solid black;
+    flex-wrap: wrap;
+
+}
+
+h1{
+    text-align: center;
+}
+
+.container{
+    width: 66%;
+    margin: auto;
+    background-color: #fff;
+    border-radius: 4px;
+}

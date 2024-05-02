@@ -1,0 +1,56 @@
+<div class="container">
+
+
+<h1>Formulario de Registro</h1>
+<form [formGroup]="productForm" #form="ngForm">
+    <div style="width: 40%; margin: 10px;">
+        <span>ID</span>
+        <input devsu-input formControlName="id" type="text" />
+        <!-- <span>{{ idTaken() }}</span> -->
+        @if( !productForm.controls.id.valid && (productForm.controls.id.dirty
+        || form.submitted) ){
+        <p style="color: #ff0000;">Por favor ingrese un ID Valido</p>
+        }
+    </div>
+    <div style="width: 40%; margin: 10px;">
+        <span>Nombre</span>
+        <input devsu-input formControlName="name" type="text" />
+        @if( !productForm.controls.name.valid && (productForm.controls.name.dirty
+        || form.submitted) ){
+        <p style="color: #ff0000;">Por favor ingrese un nombre Valido</p>
+        }
+    </div>
+    <div style="width: 40%; margin: 10px;">
+        <span>Descripcion</span>
+        <input devsu-input formControlName="description" type="text" />
+        @if( !productForm.controls.description.valid && (productForm.controls.description.dirty
+        || form.submitted) ){
+        <p style="color: #ff0000;">Por favor ingrese una description</p>
+        }
+    </div>
+    <div style="width: 40%; margin: 10px;">
+        <span>Logo</span>
+        <input devsu-input formControlName="logo" type="text" />
+        @if( !productForm.controls.logo.valid && (productForm.controls.logo.dirty
+        || form.submitted) ){
+        <p style="color: #ff0000;">Por favor ingrese una logo</p>
+        }
+    </div>
+    <div style="width: 40%; margin: 10px;">
+        <span>Fecha de Liberacion</span>
+        <input devsu-input formControlName="date_release" type="date" />
+        @if( !productForm.controls.date_release.valid && (productForm.controls.date_release.dirty
+        || form.submitted) ){
+        <p style="color: #ff0000;">Por favor ingrese un fecha valida</p>
+        }
+    </div>
+    <div style="width: 40%; margin: 10px;">
+        <span>Fecha de revision</span>
+        <input devsu-input formControlName="date_revision" type="date" [disabled]="true" />
+        @if( !productForm.controls.date_revision.valid && (productForm.controls.date_revision.dirty
+        || form.submitted) ){
+        <p style="color: #ff0000;">Por favor ingrese un fecha valida</p>
+        }
+    </div>
+</form>
+</div>

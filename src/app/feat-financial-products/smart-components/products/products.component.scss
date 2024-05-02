@@ -23,7 +23,11 @@ i {
 
 
 }
-
+.table-top{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 .search-bar-container {
     width: 230px;
 }
@@ -35,7 +39,7 @@ th {
 
 thead {
     font-size: 1rem;
-    background: #c9c9c9;
+    background: #f9fafc;
 
 }
 
@@ -56,6 +60,26 @@ table {
         height: 1.3rem;
 
     }
+}
+.add-btn{
+    background: #f5df66;
+    padding: 10px;
+    border: 1px solid #808080;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #000;
+
+}
+
+.add-btn:hover{
+    cursor: pointer;
+    background: #ecd54f;
+
+}
+.add-btn:focus{
+    cursor: pointer;
+    color: #808080;
+
 }
 
 td {

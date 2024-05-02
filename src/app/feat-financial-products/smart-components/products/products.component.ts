@@ -8,10 +8,11 @@ import { FormsModule } from '@angular/forms';
 import { SearchBarComponent } from '../../ui-components/search-bar/search-bar.component';
 import { SelectUiComponent } from '../../../shared/ui-design-system/form/select-ui.component';
 import { FinancialProduct } from '../../../type-database/financial-product.type';
+import { RouterLink } from '@angular/router';
 
 @Component({
   standalone: true,
-  imports: [JsonPipe, DatePipe, FormsModule, SearchBarComponent, SelectUiComponent],
+  imports: [JsonPipe, DatePipe, FormsModule, SearchBarComponent, SelectUiComponent, RouterLink],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss'
 })
