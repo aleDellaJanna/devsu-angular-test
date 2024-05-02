@@ -21,6 +21,18 @@ export class FinancialProductsService {
     )
   }
 
+  createProduct(financialProduct: FinancialProduct){
+    return this.http.post<FinancialProduct>(`${this.baseUrl}`,financialProduct).pipe(
+      tap(data=>console.log(data)),
+      catchError(this.handleError)
+    )
+  }
+  checkIdAvailable(id: string){
+    return this.http.get<boolean>(`${this.baseUrl}/verification?id=${id}`).pipe(
+      tap(data=>console.log(data)),
+      catchError(this.handleError)
+    )
+  }
   handleError(error: HttpErrorResponse): Observable<never>{
     return throwError(()=>error)
   }

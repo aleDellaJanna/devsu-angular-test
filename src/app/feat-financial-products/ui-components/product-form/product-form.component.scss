@@ -24,3 +24,41 @@ h1{
     background-color: #fff;
     border-radius: 4px;
 }
+
+.control-wrapper{
+    margin:10px;
+    width: 100%;
+    @media (min-width: 768px) {
+        width: 40% !important;
+    }
+}
+
+.btns-container{
+    width: 100%;
+    padding-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.btns-container>button{
+    margin: 10px;
+}
+
+.reset-btn{
+    background: #f4f6f9;
+    padding: 10px;
+    border: 1px solid #808080;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #000;
+}
+
+.confirm-btn{
+    background: #f5df66;
+    padding: 10px;
+    border: 1px solid #808080;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #000;
+    
+}

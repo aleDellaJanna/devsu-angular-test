@@ -2,33 +2,40 @@
 
 
 <h1>Formulario de Registro</h1>
-<form [formGroup]="productForm" #form="ngForm">
-    <div style="width: 40%; margin: 10px;">
+<form [formGroup]="productForm" #form="ngForm" (ngSubmit)="submit()">
+    <div class="control-wrapper">
         <span>ID</span>
         <input devsu-input formControlName="id" type="text" />
         <!-- <span>{{ idTaken() }}</span> -->
-        @if( !productForm.controls.id.valid && (productForm.controls.id.dirty
+        @if(idTaken() !== 'PENDING' && !productForm.controls.id.valid && (productForm.controls.id.dirty
         || form.submitted) ){
         <p style="color: #ff0000;">Por favor ingrese un ID Valido</p>
         }
+        @if(idTaken() === 'PENDING'){
+        <p >Verifcando id...</p>
+        }
+        @if (idTaken()==='VALID') {
+            <p style="color: #008000;">ID valido</p>
+
+        }
     </div>
-    <div style="width: 40%; margin: 10px;">
+    <div class="control-wrapper">
         <span>Nombre</span>
         <input devsu-input formControlName="name" type="text" />
         @if( !productForm.controls.name.valid && (productForm.controls.name.dirty
         || form.submitted) ){
-        <p style="color: #ff0000;">Por favor ingrese un nombre Valido</p>
+        <p style="color: #ff0000;">Por favor ingrese un nombre mayor a 5 caracteres</p>
         }
     </div>
-    <div style="width: 40%; margin: 10px;">
+    <div class="control-wrapper">
         <span>Descripcion</span>
         <input devsu-input formControlName="description" type="text" />
         @if( !productForm.controls.description.valid && (productForm.controls.description.dirty
         || form.submitted) ){
-        <p style="color: #ff0000;">Por favor ingrese una description</p>
+        <p style="color: #ff0000;">Por favor ingrese una descripcion mayor a 10 caracteres </p>
         }
     </div>
-    <div style="width: 40%; margin: 10px;">
+    <div class="control-wrapper">
         <span>Logo</span>
         <input devsu-input formControlName="logo" type="text" />
         @if( !productForm.controls.logo.valid && (productForm.controls.logo.dirty
@@ -36,7 +43,7 @@
         <p style="color: #ff0000;">Por favor ingrese una logo</p>
         }
     </div>
-    <div style="width: 40%; margin: 10px;">
+    <div class="control-wrapper">
         <span>Fecha de Liberacion</span>
         <input devsu-input formControlName="date_release" type="date" />
         @if( !productForm.controls.date_release.valid && (productForm.controls.date_release.dirty
@@ -44,13 +51,15 @@
         <p style="color: #ff0000;">Por favor ingrese un fecha valida</p>
         }
     </div>
-    <div style="width: 40%; margin: 10px;">
+    <div class="control-wrapper">
         <span>Fecha de revision</span>
-        <input devsu-input formControlName="date_revision" type="date" [disabled]="true" />
-        @if( !productForm.controls.date_revision.valid && (productForm.controls.date_revision.dirty
-        || form.submitted) ){
-        <p style="color: #ff0000;">Por favor ingrese un fecha valida</p>
-        }
+        <input devsu-input formControlName="date_revision" type="date"/>
+
+    </div>
+    <div class="btns-container">
+        <button devsu-button buttonType="light" [btnDisabled]="productForm.pristine" [disabled]="productForm.pristine || idTaken()==='PENDING'" (click)="reset()">Reiniciar</button>
+
+        <button devsu-button buttonType="default"   [btnDisabled]="productForm.invalid"  type="submit" [disabled]="productForm.invalid || idTaken()==='PENDING'" >Enviar</button>
     </div>
 </form>
 </div>
