@@ -19,103 +19,17 @@ export class ProductsComponent {
 
   private readonly fincialProductsState = inject(FinancialProductsState);
 
-  protected products = computed(() => [...this.fincialProductsState.products(),  {
-    id: "121321",
-    name: "1",
-    description: "Core i5 10 generacion",
-    logo: "https://www.mastercard.es/content/dam/public/mastercardcom/eu/es/images/Consumidores/escoge-tu-tarjeta/credito/credito-world/1280x720-mc-sym-card-wrld-ci-5BIN-mm.png",
-    date_release: "2024-04-30T00:00:00.000+00:00",
-    date_revision: "2024-05-01T00:00:00.000+00:00"
-  },
-  {
-    id: "121321",
-    name: "2",
-    description: "Core i5 10 generacion",
-    logo: "https://www.mastercard.es/content/dam/public/mastercardcom/eu/es/images/Consumidores/escoge-tu-tarjeta/credito/credito-world/1280x720-mc-sym-card-wrld-ci-5BIN-mm.png",
-    date_release: "2024-04-30T00:00:00.000+00:00",
-    date_revision: "2024-05-01T00:00:00.000+00:00"
-  },
-  {
-    id: "121321",
-    name: "3",
-    description: "Core i5 10 generacion",
-    logo: "https://www.mastercard.es/content/dam/public/mastercardcom/eu/es/images/Consumidores/escoge-tu-tarjeta/credito/credito-world/1280x720-mc-sym-card-wrld-ci-5BIN-mm.png",
-    date_release: "2024-04-30T00:00:00.000+00:00",
-    date_revision: "2024-05-01T00:00:00.000+00:00"
-  },
-  {
-    id: "121321",
-    name: "4",
-    description: "Core i5 10 generacion",
-    logo: "https://www.mastercard.es/content/dam/public/mastercardcom/eu/es/images/Consumidores/escoge-tu-tarjeta/credito/credito-world/1280x720-mc-sym-card-wrld-ci-5BIN-mm.png",
-    date_release: "2024-04-30T00:00:00.000+00:00",
-    date_revision: "2024-05-01T00:00:00.000+00:00"
-  },
-  {
-    id: "121321",
-    name: "5",
-    description: "Core i5 10 generacion",
-    logo: "https://www.mastercard.es/content/dam/public/mastercardcom/eu/es/images/Consumidores/escoge-tu-tarjeta/credito/credito-world/1280x720-mc-sym-card-wrld-ci-5BIN-mm.png",
-    date_release: "2024-04-30T00:00:00.000+00:00",
-    date_revision: "2024-05-01T00:00:00.000+00:00"
-  },
-  {
-    id: "121321",
-    name: "6",
-    description: "Core i5 10 generacion",
-    logo: "https://www.mastercard.es/content/dam/public/mastercardcom/eu/es/images/Consumidores/escoge-tu-tarjeta/credito/credito-world/1280x720-mc-sym-card-wrld-ci-5BIN-mm.png",
-    date_release: "2024-04-30T00:00:00.000+00:00",
-    date_revision: "2024-05-01T00:00:00.000+00:00"
-  },
-  {
-    id: "121321",
-    name: "7",
-    description: "Core i5 10 generacion",
-    logo: "https://www.mastercard.es/content/dam/public/mastercardcom/eu/es/images/Consumidores/escoge-tu-tarjeta/credito/credito-world/1280x720-mc-sym-card-wrld-ci-5BIN-mm.png",
-    date_release: "2024-04-30T00:00:00.000+00:00",
-    date_revision: "2024-05-01T00:00:00.000+00:00"
-  },
-  {
-    id: "121321",
-    name: "8",
-    description: "Core i5 10 generacion",
-    logo: "https://www.mastercard.es/content/dam/public/mastercardcom/eu/es/images/Consumidores/escoge-tu-tarjeta/credito/credito-world/1280x720-mc-sym-card-wrld-ci-5BIN-mm.png",
-    date_release: "2024-04-30T00:00:00.000+00:00",
-    date_revision: "2024-05-01T00:00:00.000+00:00"
-  },
-  {
-    id: "121321",
-    name: "9",
-    description: "Core i5 10 generacion",
-    logo: "https://www.mastercard.es/content/dam/public/mastercardcom/eu/es/images/Consumidores/escoge-tu-tarjeta/credito/credito-world/1280x720-mc-sym-card-wrld-ci-5BIN-mm.png",
-    date_release: "2024-04-30T00:00:00.000+00:00",
-    date_revision: "2024-05-01T00:00:00.000+00:00"
-  },
-  {
-    id: "121321",
-    name: "10",
-    description: "Core i5 10 generacion",
-    logo: "https://www.mastercard.es/content/dam/public/mastercardcom/eu/es/images/Consumidores/escoge-tu-tarjeta/credito/credito-world/1280x720-mc-sym-card-wrld-ci-5BIN-mm.png",
-    date_release: "2024-04-30T00:00:00.000+00:00",
-    date_revision: "2024-05-01T00:00:00.000+00:00"
-  },
-  {
-    id: "121321",
-    name: "11",
-    description: "Core i5 10 generacion",
-    logo: "https://www.mastercard.es/content/dam/public/mastercardcom/eu/es/images/Consumidores/escoge-tu-tarjeta/credito/credito-world/1280x720-mc-sym-card-wrld-ci-5BIN-mm.png",
-    date_release: "2024-04-30T00:00:00.000+00:00",
-    date_revision: "2024-05-01T00:00:00.000+00:00"
-  }]);
+  products = computed(() => this.fincialProductsState.products());
   protected loading = computed(() => this.fincialProductsState.loading());
   protected error = computed(() => this.fincialProductsState.error());
 
   searchTerm = signal('');
-  protected itemsPerPage = signal<number>(5);
+  itemsPerPage = signal<number>(5);
   protected pageIndex = signal(1);
   protected startIndex = computed(()=>(this.pageIndex()-1)*this.itemsPerPage())
-
+  
   protected totalProducts = computed(()=>this.products().length)
+  protected displayItems = computed(()=>this.itemsPerPage()*this.pageIndex()<=this.totalProducts()?this.itemsPerPage()*this.pageIndex():this.totalProducts())
   constructor() {
     this.fincialProductsState.getFinancialProducts();
   }
@@ -125,12 +39,15 @@ export class ProductsComponent {
     const searchTerm  = this.searchTerm().toLowerCase();
     const startIndex = this.startIndex();
     const endIndex = this.startIndex()+this.itemsPerPage();
+    
     //If any of the signals changes, we filter the products
     return {
       products: this.filterProducts(products,searchTerm,startIndex,endIndex),
       loading: this.loading(),
       error: this.error(),
-      totalProducts: this.totalProducts()
+      totalProducts: this.totalProducts(),
+      displayItems: this.displayItems(),
+      startIndex
     }
   })
 

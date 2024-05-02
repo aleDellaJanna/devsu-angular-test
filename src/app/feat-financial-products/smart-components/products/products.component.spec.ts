@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ProductsComponent } from './products.component';
 import { FinancialProductsState } from '../../../data-access-financial-products/financial-products.state';
 import { By } from '@angular/platform-browser';
+import { Component, computed, signal } from '@angular/core';
 
 describe('ProductsComponent', () => {
   let component: ProductsComponent;
@@ -27,15 +28,18 @@ describe('ProductsComponent', () => {
     date_release: "2024-04-30T00:00:00.000+00:00",
     date_revision: "2024-05-01T00:00:00.000+00:00"
   }
+
+  let mockProductsSignal = signal([mockProduct, mockProductB])
   beforeEach(async () => {
+    jest.restoreAllMocks()
     await TestBed.configureTestingModule({
       imports: [ProductsComponent],
       providers: [
         {
           provide: FinancialProductsState,
           useValue: {
-            getFinancialProducts: jest.fn(),
-            products: jest.fn().mockReturnValue([mockProduct, mockProductB]),
+            getFinancialProducts: jest.fn().mockReturnValue(mockProductsSignal),
+            products: computed(()=>mockProductsSignal()),
             loading: jest.fn(),
             error: jest.fn()
 
@@ -62,9 +66,6 @@ describe('ProductsComponent', () => {
 
   it('should filter the products list when searchTerm gets a new value', () => {
     const searchTerm = mockProduct.name;
-    // mockFinancialProductsState.products()
-    console.log(component.vm)
-    // fixture.detectChanges();
     const items = fixture.debugElement.queryAll(By.css('[data-test="product-item"]'));
     expect(items.length).toEqual(2)
     component.searchTerm.set(searchTerm);
@@ -72,5 +73,19 @@ describe('ProductsComponent', () => {
     const itemsB = fixture.debugElement.queryAll(By.css('[data-test="product-item"]'));
     expect(itemsB.length).toEqual(1)
     
-  })
+  });
+  it('should display more item if itemsPerPageChanged', () => {
+    const itemsPerPage = 10;
+    const products = [mockProduct,mockProduct,mockProduct,mockProduct,mockProduct,mockProduct,mockProduct]
+    mockProductsSignal.set(products)
+    fixture.detectChanges()
+    const items = fixture.debugElement.queryAll(By.css('[data-test="product-item"]'));
+    expect(items.length).toEqual(5)
+    component.itemsPerPage.set(itemsPerPage);
+    fixture.detectChanges()
+    const itemsB = fixture.debugElement.queryAll(By.css('[data-test="product-item"]'));
+    expect(itemsB.length).toEqual(products.length)
+    
+  });
+
 });

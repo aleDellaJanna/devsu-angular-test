@@ -22,10 +22,10 @@ export class FinancialProductsState {
   })
 
   //Selectors for state
-  public readonly products = computed(()=>this.state().products);
-  public readonly error = computed(()=>this.state().error);
-  public readonly loaded = computed(()=>this.state().loaded);
-  public readonly loading = computed(()=>this.state().loading);
+  public products = computed(()=>this.state().products);
+  public error = computed(()=>this.state().error);
+  public loaded = computed(()=>this.state().loaded);
+  public loading = computed(()=>this.state().loading);
 
   constructor() { }
 
