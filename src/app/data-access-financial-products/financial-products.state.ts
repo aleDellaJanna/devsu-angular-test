@@ -1,6 +1,8 @@
-import { Injectable, computed, inject, signal } from '@angular/core';
+import { Injectable, computed, effect, inject, signal } from '@angular/core';
 import { FinancialProduct } from '../type-database/financial-product.type';
 import { FinancialProductsService } from './financial-products.service';
+import { Subject } from 'rxjs';
+import { toSignal } from '@angular/core/rxjs-interop';
 export interface State {
   products: FinancialProduct[];
   loaded: boolean;
@@ -27,7 +29,16 @@ export class FinancialProductsState {
   public loaded = computed(()=>this.state().loaded);
   public loading = computed(()=>this.state().loading);
 
-  constructor() { }
+  public refetch = new Subject<void>();
+  private readonly refetchSignal = toSignal(this.refetch);
+  constructor(){
+    effect(()=>{
+      if(this.refetchSignal()){
+        this.getFinancialProducts()
+      }
+    })
+  }
+
 
 
   public getFinancialProducts(){

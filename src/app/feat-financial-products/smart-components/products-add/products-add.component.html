@@ -1,3 +1,6 @@
 <div style="padding-top: 40px;">
-    <product-form></product-form>
+    <product-form (formSubmited)="save($event)"></product-form>
+    @if (error()) {
+        <p>{{error()}}</p>
+    }
 </div>

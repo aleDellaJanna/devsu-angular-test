@@ -6,9 +6,10 @@
                 <search-bar label="Producto" (searchTermChanged)="searchTerm.set($event); pageIndex.set(1)"/>   
             </div>
             <div>
-                <a class="add-btn" routerLink="add">
-                    Agregar
-                </a>
+                <button devsu-button buttonType="default" routerLink="add">
+
+                        Agregar
+                </button>
             </div>
         </div>
         <div class="table-container">

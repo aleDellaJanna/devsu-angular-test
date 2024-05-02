@@ -4,6 +4,9 @@ import { ProductsComponent } from './products.component';
 import { FinancialProductsState } from '../../../data-access-financial-products/financial-products.state';
 import { By } from '@angular/platform-browser';
 import { Component, computed, signal } from '@angular/core';
+import { RouterLink, RouterModule } from '@angular/router';
+import { ButtonUiComponent } from '../../../shared/ui-design-system/button-ui.component';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('ProductsComponent', () => {
   let component: ProductsComponent;
@@ -33,7 +36,7 @@ describe('ProductsComponent', () => {
   beforeEach(async () => {
     jest.restoreAllMocks()
     await TestBed.configureTestingModule({
-      imports: [ProductsComponent],
+      imports: [ProductsComponent, RouterLink,ButtonUiComponent, RouterTestingModule],
       providers: [
         {
           provide: FinancialProductsState,
@@ -74,7 +77,7 @@ describe('ProductsComponent', () => {
     expect(itemsB.length).toEqual(1)
     
   });
-  it('should display more item if itemsPerPageChanged', () => {
+  it('should display more items if itemsPerPageChanged', () => {
     const itemsPerPage = 10;
     const products = [mockProduct,mockProduct,mockProduct,mockProduct,mockProduct,mockProduct,mockProduct]
     mockProductsSignal.set(products)
@@ -85,6 +88,26 @@ describe('ProductsComponent', () => {
     fixture.detectChanges()
     const itemsB = fixture.debugElement.queryAll(By.css('[data-test="product-item"]'));
     expect(itemsB.length).toEqual(products.length)
+    
+  });
+  it('should display the next following items', () => {
+    const products = [
+      mockProduct,
+      mockProduct,
+      mockProduct,
+      mockProduct,
+      mockProduct,
+      mockProductB, //1st element after nextpage called with 5 items per page
+      mockProduct]
+    mockProductsSignal.set(products)
+    fixture.detectChanges()
+    const items = fixture.debugElement.queryAll(By.css('[data-test="product-item"]'));
+    console.log(items[0].nativeElement.textContent)
+    expect(items[0].nativeElement.textContent).toContain('Peluqueria')
+    component.nextPage()
+    fixture.detectChanges()
+    const itemsB = fixture.debugElement.queryAll(By.css('[data-test="product-item"]'));
+    expect(itemsB[0].nativeElement.textContent).toContain('Cualca')
     
   });
 
