@@ -3,7 +3,7 @@ import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { HttpHeadersIntercpetor } from './shared/ui-design-system/form/util-http-intercpetor/http-header.intercpetor';
+import { HttpHeadersIntercpetor } from './shared/util-http-intercpetor/http-header.intercpetor';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes),

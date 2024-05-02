@@ -1,7 +1,7 @@
 <div class="container">
     <div class="inner-container">
         <div class="search-bar-container">
-<search-bar label="Producto" (searchTermChanged)="searchTerm.set($event)"/>   
+<search-bar label="Producto" (searchTermChanged)="searchTerm.set($event); pageIndex.set(1)"/>   
      </div>
         <div class="table-container">
 
@@ -51,7 +51,7 @@
                         </td>
                     </tr>
                 } 
-                    @for (product of vm.products; track product.id) {
+                    @for (product of vm.products; track product.name) {
                         <tr data-test="product-item">
                             <td class="logo">
                                 <img [src]="product.logo?product.logo:'/assets/no-image.svg'" [alt]="'Imagen del producto '+product.name">
@@ -78,8 +78,38 @@
                 
             </tbody>
         </table>
+        <div class="table-footer">
+            <div>
+                <p>
+                    {{vm.products.length}} Resultados
+                </p>
+            </div>
+            <div class="pagination-container">
+      
+                <select devsu-select name="itemsPerPage" [ngModel]="itemsPerPage()" (ngModelChange)="itemsPerPage.set(+($event)); pageIndex.set(1)">
+                    @for (val of [5,10,20]; track $index) {
+                        <option [value]="val" >
+                            {{val}}
+                        </option>
+                    }
+                </select>
+                <div>
+                    
+                    <div class="paginator-control">
+                        {{startIndex()+1}}-{{itemsPerPage()*pageIndex()}} de {{vm.totalProducts}}
+                        <button (click)="prevPage()">
+                            <i class="fa fa-chevron-left" ></i>
+                        </button>
+                        
+                        <button (click)="nextPage()">
+
+                            <i class="fa fa-chevron-right" ></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     </div>
-
 </div>

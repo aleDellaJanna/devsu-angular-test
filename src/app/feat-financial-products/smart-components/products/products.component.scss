@@ -1,43 +1,45 @@
-
-
-.title{
+.title {
     text-align: center;
     font-size: 1.3rem;
 
 }
 
-i{
+i {
     color: #808080;
 }
-.inner-container{
+
+.inner-container {
     width: calc(100% - 120px);
     margin: auto;
 
 
 }
 
-.table-container{
+.table-container {
     background-color: #fff;
-    box-sizing: border-box; 
+    box-sizing: border-box;
     overflow-x: auto;
 
 
 
 }
-.search-bar-container{
+
+.search-bar-container {
     width: 230px;
 }
-th{
+
+th {
     // text-align: left !important;
-    padding:  0.75rem 1.2rem;
+    padding: 0.75rem 1.2rem;
 }
-thead{
+
+thead {
     font-size: 1rem;
     background: #c9c9c9;
 
 }
 
-table{
+table {
     // padding-top: 10px;
     padding: 2rem 2rem;
     width: 100% !important;
@@ -46,16 +48,19 @@ table{
     text-align: left;
     color: #808080;
 }
-.logo{
+
+.logo {
     text-align: center;
-    img{
+
+    img {
         height: 1.3rem;
-        
+
     }
 }
-td{
+
+td {
     // text-align: left;
-    padding:  0.75rem 1.2rem;
+    padding: 0.75rem 1.2rem;
 
 }
 
@@ -63,6 +68,7 @@ td{
     margin-top: 20px;
     overflow: auto;
 }
+
 .pagination button {
     background-color: #4CAF50;
     color: white;
@@ -72,15 +78,51 @@ td{
     float: left;
     margin-left: 5px;
 }
+
 .pagination button.active {
     background-color: #45a049;
 }
 
 
-.edit-delete-btn:hover{
+.edit-delete-btn:hover {
     cursor: pointer;
-    i{
+
+    i {
 
         color: black;
     }
+}
+
+
+.table-footer {
+    display: flex;
+    padding-right: 40px;
+    justify-content: space-between;
+    padding-left: 40px;
+}
+
+.pagination-container {
+    display: flex;
+    align-items: center;
+}
+
+.paginator-control {
+    width: 120px;
+    margin-left: 12px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.paginator-control>button {
+    background: none;
+    border: 0;
+
+}
+
+.paginator-control>button:hover {
+    cursor: pointer;
+    i {
+        color: black;
+    }
+
 }
