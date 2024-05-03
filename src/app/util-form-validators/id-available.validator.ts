@@ -11,7 +11,6 @@ export function idAvailableValidator(
           switchMap(() =>
             financialService.checkIdAvailable(control.value)
               .pipe(
-                tap(data=>console.log(data)),
                 map((isAvailable) => (!isAvailable ? null : { idAvailable: true })),
                 catchError(() => of(null)))
 

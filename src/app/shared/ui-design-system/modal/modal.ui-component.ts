@@ -12,7 +12,7 @@ import { Overlay, OverlayConfig, OverlayModule } from '@angular/cdk/overlay';
 import { CdkPortal, PortalModule } from '@angular/cdk/portal';
 
 @Component({
-  selector: 'golondrinas-modal',
+  selector: 'devsu-modal',
   standalone: true,
   imports: [CommonModule, PortalModule, OverlayModule],
   templateUrl: './modal.ui-component.html',
@@ -42,7 +42,6 @@ export class ModalUiComponent implements OnDestroy, AfterViewInit {
   public ngAfterViewInit(): void {
     // Wait until the view is initialized to attach the portal to the overlay
     this.overlayRef?.attach(this.portal);
-    console.log(this.portal)
   }
 
   constructor() {

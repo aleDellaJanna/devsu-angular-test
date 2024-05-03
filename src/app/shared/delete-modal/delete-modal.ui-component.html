@@ -1,0 +1,22 @@
+<devsu-modal (closeDialog)="decline.emit()">
+  <ng-container devsu-modal-body>
+    <h3>
+      ¿Estas seguro de eliminar  el producto {{name()}}?
+    </h3>
+  </ng-container>
+  <ng-container devsu-modal-footer>
+    <div class="btns-container">
+      
+      <button
+      (click)="decline.emit()"
+      devsu-button
+      buttonType="red"
+      >
+      Cancelar
+    </button>
+      <button (click)="approve.emit()" devsu-button buttonType="default">
+        Confirmar
+      </button>
+  </div>
+  </ng-container>
+</devsu-modal>

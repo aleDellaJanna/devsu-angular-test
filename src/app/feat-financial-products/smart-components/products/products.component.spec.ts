@@ -102,7 +102,6 @@ describe('ProductsComponent', () => {
     mockProductsSignal.set(products)
     fixture.detectChanges()
     const items = fixture.debugElement.queryAll(By.css('[data-test="product-item"]'));
-    console.log(items[0].nativeElement.textContent)
     expect(items[0].nativeElement.textContent).toContain('Peluqueria')
     component.nextPage()
     fixture.detectChanges()

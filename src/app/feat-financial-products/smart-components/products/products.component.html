@@ -60,7 +60,7 @@
                     </tr>
                 } @else {  
                     @for (product of vm.products; track product.id) {
-                        <tr data-test="product-item" product-table-item [product]="product">
+                        <tr data-test="product-item" product-table-item [product]="product" (deleteProduct)="openModal($event)">
                         </tr>
                     }@empty {
                         <tr>
@@ -106,3 +106,7 @@
 
     </div>
 </div>
+
+@if(vm.openDeleteModal){
+    <devsu-delete-modal [name]="productSelectedForDelete()?.name!" (decline)="openDeleteModal.set(false)" (approve)="deleteProduct()"></devsu-delete-modal>
+}

@@ -11,7 +11,6 @@ import { CommonModule } from '@angular/common';
     styles: [`
     .default{
         background: #ecd54f !important;
-        border-color: #d1d5dba2 !important;
 
     }
 
@@ -19,15 +18,19 @@ import { CommonModule } from '@angular/common';
         width: 100%;
         padding: 00.5rem;
         border-radius: 0.5rem/* 8px */ !important;
+        border-color: #d1d5dba2 !important;
 
         cursor: pointer;
         @media (min-width: 768px) {
             width: auto !important;
         }
     }
+    .red{
+        background: red !important;
+
+    }
     .light{
         background: #fff !important;
-        border-color: #d1d5dba2 !important;
     }
     .light:focus{
         outline: 2px solid transparent !important;
@@ -43,6 +46,7 @@ export class ButtonUiComponent {
         | 'none'
         | 'default'
         | 'light'
+        | 'red'
         = 'light';
 
     @Input() public btnDisabled = false;
@@ -57,7 +61,9 @@ export class ButtonUiComponent {
             case 'default':
                 return `${extraClasses} button default`;         
             case 'light':
-                return `${extraClasses} button light`;         
+                return `${extraClasses} button light`;        
+            case 'red':
+                return `${extraClasses} button red`;    
             case 'none':
                 return `button light`;         
             default:

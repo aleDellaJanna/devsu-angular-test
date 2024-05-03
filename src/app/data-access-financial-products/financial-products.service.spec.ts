@@ -96,4 +96,19 @@ describe('FinancialProductsService', () => {
 
     req.flush(true);
   });
+
+  it('should delete product successfully', () => {
+
+    service.deleteProduct(mockProduct.id).subscribe(data => {
+      expect(data).toEqual(mockProduct); 
+    });
+
+    const req = httpMock.expectOne(`${service.baseUrl}?id=${mockProduct.id}`); 
+
+    expect(req.request.method).toEqual('DELETE'); 
+
+    req.flush(mockProduct);
+  });
+
+  
 });

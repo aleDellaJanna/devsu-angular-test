@@ -18,7 +18,6 @@ export class ProductsAddComponent {
   private readonly router = inject(Router);
   protected readonly error = signal<string | null>(null)
   save(product: FinancialProduct){
-    console.log(product)
     this.financialProductService.createProduct(product).subscribe(
       ({
         next: (val)=>{this.financialProductState.refetch.next();

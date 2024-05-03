@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable, computed, inject, signal } from '@angular/core';
 import { FinancialProduct } from '../type-database/financial-product.type';
 import { Observable, catchError, tap, throwError } from 'rxjs';
@@ -16,26 +16,29 @@ export class FinancialProductsService {
   get(){
     return this.http.get<FinancialProduct[]>(`${this.baseUrl}`).pipe(
 
-      tap(data=>console.log(data)),
       catchError(this.handleError)
     )
   }
   updateProduct(financialProduct: FinancialProduct){
     return this.http.put<FinancialProduct>(`${this.baseUrl}`,financialProduct).pipe(
-      tap(data=>console.log(data)),
+      catchError(this.handleError)
+    )
+  }
+
+  deleteProduct(id: string){
+
+    return this.http.delete<boolean>(`${this.baseUrl}?id=${id}`).pipe(
       catchError(this.handleError)
     )
   }
 
   createProduct(financialProduct: FinancialProduct){
     return this.http.post<FinancialProduct>(`${this.baseUrl}`,financialProduct).pipe(
-      tap(data=>console.log(data)),
       catchError(this.handleError)
     )
   }
   checkIdAvailable(id: string){
     return this.http.get<boolean>(`${this.baseUrl}/verification?id=${id}`).pipe(
-      tap(data=>console.log(data)),
       catchError(this.handleError)
     )
   }

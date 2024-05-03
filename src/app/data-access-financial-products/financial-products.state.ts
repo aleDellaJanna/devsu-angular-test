@@ -4,6 +4,7 @@ import { FinancialProductsService } from './financial-products.service';
 import { Subject } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 export interface State {
   products: FinancialProduct[];
   loaded: boolean;
@@ -67,6 +68,33 @@ export class FinancialProductsState {
       },
       error: (err) => {
         this.state.update((state) => ({ ...state, loading: false, error: 'Error al actualizar el productos', loaded: false }))
+      }
+    })
+  }
+
+  public deleteProduct(deleteProduct: FinancialProduct) {
+    this.state.update((state) => ({ ...state, loading: true }))
+    this.financialProductsService.deleteProduct(deleteProduct.id).subscribe({
+      next: () => {
+        this.state.update((state) => ({
+          ...state,
+          products: state.products.filter(product => product.id !== deleteProduct.id),
+          loading: false, loaded: true
+        }));
+      },
+      error: (err: HttpErrorResponse) => {
+        //API response as error when succesufly delete  with status 200, so following guide...
+        console.log(err)
+        if(err.status===200){
+          this.state.update((state) => ({
+            ...state,
+            products: state.products.filter(product => product.id !== deleteProduct.id),
+            loading: false, loaded: true
+          }));
+        }else{
+
+          this.state.update((state) => ({ ...state, loading: false, error: `Error al eliminar el producto ${deleteProduct.name}`, loaded: false }))
+        }
       }
     })
   }
