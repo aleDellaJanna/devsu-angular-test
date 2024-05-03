@@ -10,10 +10,11 @@ import { SelectUiComponent } from '../../../shared/ui-design-system/form/select-
 import { FinancialProduct } from '../../../type-database/financial-product.type';
 import { RouterLink } from '@angular/router';
 import { ButtonUiComponent } from '../../../shared/ui-design-system/button-ui.component';
+import { ProductTableItemComponent } from '../../ui-components/product-table-item/product-table-item.component';
 
 @Component({
   standalone: true,
-  imports: [DatePipe, FormsModule, SearchBarComponent, SelectUiComponent, RouterLink, ButtonUiComponent],
+  imports: [DatePipe, FormsModule, SearchBarComponent, SelectUiComponent, RouterLink, ButtonUiComponent, ProductTableItemComponent],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss'
 })
@@ -29,7 +30,6 @@ export class ProductsComponent {
   itemsPerPage = signal<number>(5);
   protected pageIndex = signal(1);
   protected startIndex = computed(()=>(this.pageIndex()-1)*this.itemsPerPage())
-  
   protected totalProducts = computed(()=>this.products().length)
   protected displayItems = computed(()=>this.itemsPerPage()*this.pageIndex()<=this.totalProducts()?this.itemsPerPage()*this.pageIndex():this.totalProducts())
   constructor() {

@@ -59,24 +59,8 @@
                         Cargando...
                     </tr>
                 } @else {  
-                    @for (product of vm.products; track product.name) {
-                        <tr data-test="product-item">
-                            <td class="logo">
-                                <img [src]="product.logo?product.logo:'/assets/no-image.svg'" [alt]="'Imagen del producto '+product.name">
-                            </td>
-                            <td>
-                                {{product.name}}
-                            </td>
-                            <td>
-                                {{product.description}}
-                            </td>
-                            <td>
-                                {{product.date_release | date: 'dd/MM/YYYY'}}
-                            </td>
-                            <td>{{product.date_revision | date: 'dd/MM/YYYY'}}</td>
-                            <td class="edit-delete-btn">
-                                    <i class="fa fa-ellipsis-vertical "></i>
-                            </td>
+                    @for (product of vm.products; track product.id) {
+                        <tr data-test="product-item" product-table-item [product]="product">
                         </tr>
                     }@empty {
                         <tr>

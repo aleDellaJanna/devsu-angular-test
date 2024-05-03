@@ -19,7 +19,7 @@ i {
     background-color: #fff;
     box-sizing: border-box;
     overflow-x: auto;
-
+    margin-top: 30px;
 
 
 }
@@ -43,6 +43,14 @@ thead {
     background: #f9fafc;
 
 }
+.logo {
+    text-align: center;
+
+    img {
+        height: 1.3rem;
+
+    }
+}
 
 table {
     // padding-top: 10px;
@@ -54,14 +62,7 @@ table {
     color: #808080;
 }
 
-.logo {
-    text-align: center;
 
-    img {
-        height: 1.3rem;
-
-    }
-}
 
 
 td {
@@ -132,3 +133,4 @@ td {
     }
 
 }
+

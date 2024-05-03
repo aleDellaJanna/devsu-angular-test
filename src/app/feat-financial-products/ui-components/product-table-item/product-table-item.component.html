@@ -1,0 +1,35 @@
+ 
+   <td class="logo">
+        <img [src]="product().logo?product().logo:'/assets/no-image.svg'" [alt]="'Imagen del product()o '+product().name">
+    </td>
+    <td>
+        {{product().name}}
+    </td>
+    <td>
+        {{product().description}}
+    </td>
+    <td>
+        {{product().date_release | date: 'dd/MM/YYYY'}}
+    </td>
+    <td>{{product().date_revision | date: 'dd/MM/YYYY'}}</td>
+    <td class="edit-delete-btn" (click)="dropdownOpen.set(!dropdownOpen())">
+
+            <i class="fa fa-ellipsis-vertical"></i>
+            @if (dropdownOpen()) {
+                
+                <div class="dropdown-container">
+                    <div>
+                        <i class="fa fa-edit" style="color: #000;"></i>
+                        <a >EDITAR</a>
+                    </div>
+                    <div>
+                        <i class="fa fa-trash" style="color: #ff0000;"></i>
+
+                        <a >ELIMINAR
+                            
+                        </a>
+                    </div>
+                </div>
+            }
+    </td>
+
