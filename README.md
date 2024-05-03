@@ -68,3 +68,5 @@ open coverage/lcov-report/index.html
 Replace open with the appropriate command based on your operating system (e.g., xdg-open for Linux, start for Windows).
 
 This will open the coverage report in your default web browser, allowing you to analyze the code coverage metrics.
+
+
