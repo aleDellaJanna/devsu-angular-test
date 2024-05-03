@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop'
 import { FinancialProductsService } from '../../../data-access-financial-products/financial-products.service';
 import { FinancialProductsState } from '../../../data-access-financial-products/financial-products.state';
@@ -17,7 +17,8 @@ import { DeleteModalUiComponent } from '../../../shared/delete-modal/delete-moda
   standalone: true,
   imports: [DatePipe, FormsModule, SearchBarComponent, SelectUiComponent, RouterLink, ButtonUiComponent, ProductTableItemComponent, DeleteModalUiComponent],
   templateUrl: './products.component.html',
-  styleUrl: './products.component.scss'
+  styleUrl: './products.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductsComponent {
 
@@ -52,7 +53,7 @@ export class ProductsComponent {
       totalProducts: this.totalProducts(),
       displayItems: this.displayItems(),
       startIndex,
-      openDeleteModal: this.openDeleteModal()
+      // openDeleteModal: this.openDeleteModal()
     }
   })
 

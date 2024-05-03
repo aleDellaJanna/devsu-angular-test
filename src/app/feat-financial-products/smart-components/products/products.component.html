@@ -7,7 +7,6 @@
             </div>
             <div>
                 <button devsu-button buttonType="default" routerLink="add">
-
                         Agregar
                 </button>
             </div>
@@ -107,6 +106,6 @@
     </div>
 </div>
 
-@if(vm.openDeleteModal){
+@if(openDeleteModal()){
     <devsu-delete-modal [name]="productSelectedForDelete()?.name!" (decline)="openDeleteModal.set(false)" (approve)="deleteProduct()"></devsu-delete-modal>
 }
