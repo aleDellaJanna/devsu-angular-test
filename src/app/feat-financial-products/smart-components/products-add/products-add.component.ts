@@ -16,7 +16,11 @@ export class ProductsAddComponent {
   private readonly financialProductService = inject(FinancialProductsService);
   private readonly financialProductState = inject(FinancialProductsState);
   private readonly router = inject(Router);
+
+  //Error handling signal
+  //Using financialService.createProduct but could also have created a method in the state
   protected readonly error = signal<string | null>(null)
+
   save(product: FinancialProduct){
     this.financialProductService.createProduct(product).subscribe(
       ({

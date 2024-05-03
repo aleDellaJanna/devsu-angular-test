@@ -106,6 +106,6 @@
     </div>
 </div>
 
-@if(openDeleteModal()){
+@if(vm.openDeleteModal){
     <devsu-delete-modal [name]="productSelectedForDelete()?.name!" (decline)="openDeleteModal.set(false)" (approve)="deleteProduct()"></devsu-delete-modal>
 }

@@ -32,7 +32,7 @@ export class FinancialProductsState {
   public loaded = computed(() => this.state().loaded);
   public loading = computed(() => this.state().loading);
 
-  public refetch = new Subject<void>();
+  public refetch = new Subject<void>(); //Can be used from components to trigger refetch.
   private readonly refetchSignal = toSignal(this.refetch);
   constructor() {
     effect(() => {

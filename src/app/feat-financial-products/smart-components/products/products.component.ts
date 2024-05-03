@@ -24,17 +24,23 @@ export class ProductsComponent {
 
   private readonly fincialProductsState = inject(FinancialProductsState);
 
-  products = computed(() => this.fincialProductsState.products());
+  //Selectors from state
+  protected products = computed(() => this.fincialProductsState.products());
   protected loading = computed(() => this.fincialProductsState.loading());
   protected error = computed(() => this.fincialProductsState.error());
+
+  //Delete feat
+  protected openDeleteModal = signal(false);
   productSelectedForDelete = signal<FinancialProduct | null>(null)
+
+  //Paginators & search bar feat
   searchTerm = signal('');
   itemsPerPage = signal<number>(5);
-  protected openDeleteModal = signal(false);
   protected pageIndex = signal(1);
   protected startIndex = computed(() => (this.pageIndex() - 1) * this.itemsPerPage())
   protected totalProducts = computed(() => this.products().length);
   protected displayItems = computed(() => this.itemsPerPage() * this.pageIndex() <= this.totalProducts() ? this.itemsPerPage() * this.pageIndex() : this.totalProducts())
+
   constructor() {
     this.fincialProductsState.getFinancialProducts();
   }
@@ -53,13 +59,15 @@ export class ProductsComponent {
       totalProducts: this.totalProducts(),
       displayItems: this.displayItems(),
       startIndex,
-      // openDeleteModal: this.openDeleteModal()
+      openDeleteModal: this.openDeleteModal()
     }
   })
 
   public get vm() {
     return this.viewModel();
   }
+
+  //Paginator methods
   nextPage() {
     if (this.pageIndex() * this.itemsPerPage() < this.totalProducts())
       this.pageIndex.update((val) => val + 1)
@@ -76,13 +84,14 @@ export class ProductsComponent {
         || product.description.toLowerCase().includes(searchTerm.toLowerCase())).slice(startIndex, endIndex)
   }
 
+  //Used for delete feature
   openModal(product: FinancialProduct) {
     this.productSelectedForDelete.set(product);
     this.openDeleteModal.set(true);
   }
 
-  deleteProduct(){
-    if(this.productSelectedForDelete()){
+  deleteProduct() {
+    if (this.productSelectedForDelete()) {
 
       this.fincialProductsState.deleteProduct(this.productSelectedForDelete()!)
       this.openDeleteModal.set(false)

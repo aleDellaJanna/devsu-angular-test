@@ -26,7 +26,6 @@ export class FinancialProductsService {
   }
 
   deleteProduct(id: string){
-
     return this.http.delete<boolean>(`${this.baseUrl}?id=${id}`).pipe(
       catchError(this.handleError)
     )
