@@ -1,11 +1,12 @@
 import { Component, ElementRef, HostListener, Input, inject, input, signal } from '@angular/core';
 import { FinancialProduct } from '../../../type-database/financial-product.type';
 import { DatePipe } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: '[product-table-item]',
   standalone: true,
-  imports: [DatePipe],
+  imports: [DatePipe, RouterLink],
   templateUrl: './product-table-item.component.html',
   styleUrl: './product-table-item.component.scss',
 })

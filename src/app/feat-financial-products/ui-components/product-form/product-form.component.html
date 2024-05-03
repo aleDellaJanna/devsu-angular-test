@@ -8,7 +8,7 @@
         <input devsu-input formControlName="id" type="text" />
         <!-- <span>{{ idTaken() }}</span> -->
         @if(idTaken() !== 'PENDING' && !productForm.controls['id'].valid && (productForm.controls['id'].dirty
-        || form.submitted) ){
+        ) ){
         <p style="color: #ff0000;">Por favor ingrese un ID Valido</p>
         }
         @if(idTaken() === 'PENDING'){
@@ -45,7 +45,7 @@
         }
     </div>
     <div class="control-wrapper">
-        <span>Fecha de Liberacion</span>
+        <span>Fecha de Liberacion {{productForm.controls['date_release'].value}}</span>
         <input devsu-input formControlName="date_release" type="date" />
         @if( !productForm.controls['date_release'].valid && (productForm.controls['date_release'].dirty
         || form.submitted) ){

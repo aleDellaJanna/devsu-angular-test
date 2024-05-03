@@ -20,6 +20,12 @@ export class FinancialProductsService {
       catchError(this.handleError)
     )
   }
+  updateProduct(financialProduct: FinancialProduct){
+    return this.http.put<FinancialProduct>(`${this.baseUrl}`,financialProduct).pipe(
+      tap(data=>console.log(data)),
+      catchError(this.handleError)
+    )
+  }
 
   createProduct(financialProduct: FinancialProduct){
     return this.http.post<FinancialProduct>(`${this.baseUrl}`,financialProduct).pipe(
