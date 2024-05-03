@@ -27,7 +27,7 @@ export class ProductFormComponent {
     name: ['',[Validators.minLength(5), Validators.maxLength(100)]],
     description: ['', [Validators.minLength(10), Validators.maxLength(200)]],
     logo: ['', [Validators.required]],
-    date_release: ['',],
+    date_release: ['',dateValidator],
     date_revision: [''],
   });
 
