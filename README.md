@@ -3,6 +3,10 @@
  This Angular application corresponds to the technical test for DEVSU.
  
  It is fully reactive and built using only Angular's core features, without relying on any external libraries. The application leverages Angular's reactive programming capabilities, utilizing signals and RxJS for managing state and handling asynchronous operations.
+## Demo
+
+Click [here](http://devsu.alesandrodellajanna.com/) to view the demo.
+
 
 ## Table of Contents
 
