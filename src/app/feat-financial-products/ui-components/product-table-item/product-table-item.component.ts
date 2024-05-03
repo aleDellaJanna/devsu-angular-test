@@ -18,7 +18,6 @@ export class ProductTableItemComponent {
   @HostListener("document:click",['$event.target']) 
   clicked(target:any) { 
     const clickedItem = this.el.nativeElement.contains(target);
-    console.log(clickedItem)
     if(!clickedItem){
       this.dropdownOpen.set(false)
 

@@ -9,7 +9,7 @@
         <!-- <span>{{ idTaken() }}</span> -->
         @if(idTaken() !== 'PENDING' && !productForm.controls['id'].valid && (productForm.controls['id'].dirty
         ) ){
-        <p style="color: #ff0000;">Por favor ingrese un ID Valido</p>
+        <p>Por favor ingrese un ID Valido</p>
         }
         @if(idTaken() === 'PENDING'){
         <p >Verifcando id...</p>
@@ -24,7 +24,7 @@
         <input devsu-input formControlName="name" type="text" />
         @if( !productForm.controls['name'].valid && (productForm.controls['name'].dirty
         || form.submitted) ){
-        <p style="color: #ff0000;">Por favor ingrese un nombre valido (minimo 5 catacteres)</p>
+        <p>Este campo es requerido</p>
         }
 
     </div>
@@ -33,7 +33,7 @@
         <input devsu-input formControlName="description" type="text" />
         @if( !productForm.controls['description'].valid && (productForm.controls['description'].dirty
         || form.submitted) ){
-        <p style="color: #ff0000;">Por favor ingrese una descripcion mayor a 10 caracteres </p>
+        <p>Este campo es requerido </p>
         }
     </div>
     <div class="control-wrapper">
@@ -41,7 +41,7 @@
         <input devsu-input formControlName="logo" type="text" />
         @if( !productForm.controls['logo'].valid && (productForm.controls['logo'].dirty
         || form.submitted) ){
-        <p style="color: #ff0000;">Por favor ingrese una logo</p>
+        <p>Este campo es requerido</p>
         }
     </div>
     <div class="control-wrapper">
@@ -49,7 +49,7 @@
         <input devsu-input formControlName="date_release" type="date" />
         @if( !productForm.controls['date_release'].valid && (productForm.controls['date_release'].dirty
         || form.submitted) ){
-        <p style="color: #ff0000;">Por favor ingrese un fecha valida</p>
+        <p>Por favor ingrese un fecha valida</p>
         }
     </div>
     <div class="control-wrapper">

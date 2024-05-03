@@ -42,8 +42,35 @@ describe('FinancialProductsService', () => {
     expect(req.request.method).toBe('GET');
     req.flush(mockProducts);
   });
+  it('should update product successfully', () => {
 
-  it('should handle error properly', () => {
+    service.updateProduct(mockProduct).subscribe(data => {
+      expect(data).toEqual(mockProduct); 
+    });
+
+    const req = httpMock.expectOne(`${service.baseUrl}`); 
+
+    expect(req.request.method).toEqual('PUT'); 
+    expect(req.request.body).toEqual(mockProduct); 
+
+    req.flush(mockProduct);
+  });
+
+  it('should handle error when updating product', () => {
+ 
+
+    service.updateProduct(mockProduct).subscribe(
+      data => fail('expected an error'), 
+      error => {
+        expect(error).toBeTruthy(); 
+       
+      }
+    );
+
+    const req = httpMock.expectOne(`${service.baseUrl}`); 
+    req.error(new ErrorEvent('fake network error')); 
+  });
+  it('should handle error properly when trying to get products', () => {
     const errorMessage = '404 Not Found';
     service.get().subscribe(
       products => fail('expected an error'),
@@ -55,5 +82,18 @@ describe('FinancialProductsService', () => {
 
     const req = httpMock.expectOne(`${service.baseUrl}`);
     req.error(new ErrorEvent('404'), { status: 404, statusText: 'Not Found' });
+  });
+
+  it('should check if id is available', () => {
+    const mockId = '123';
+    service.checkIdAvailable(mockId).subscribe(data => {
+      expect(data).toBe(true);
+    });
+
+    const req = httpMock.expectOne(`${service.baseUrl}/verification?id=${mockId}`);
+
+    expect(req.request.method).toEqual('GET'); 
+
+    req.flush(true);
   });
 });

@@ -20,11 +20,12 @@ describe('FinancialProductsState', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        FinancialProductsState,
         {
           provide: FinancialProductsService,
           useValue: {
-            get: jest.fn().mockReturnValue([mockProduct])
+            get: jest.fn().mockReturnValue([mockProduct]),
+            updateProduct: jest.fn().mockReturnValue(of([mockProduct]))
+            
           }
         }
       ]
@@ -63,5 +64,11 @@ describe('FinancialProductsState', () => {
       loaded: false,
       loading: false
     });
+  });
+
+  it('should call updateProduct of service when called', () => {
+
+    stateService.updateProduct(mockProduct);
+    expect(productService.updateProduct).toHaveBeenCalledWith(mockProduct)
   });
 });
