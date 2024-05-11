@@ -49,8 +49,11 @@ export class ProductFormComponent implements OnInit{
           description,
           logo,
           date_release:  new Date(date_release).toISOString().split('T')[0],
-          date_revision: new Date(date_revision).toISOString().split('T')[0]
+          date_revision
         })
+        this.productForm.get('data_release')?.removeValidators(dateValidator)
+        // this.productForm.get('dat_revision')?.setValue(date_revision)
+        // this.productForm.controls['id'].removeAsyncValidators(idAvailableValidator(this.financialProductService))
         this.productForm.get('id')?.disable(); //Disable id in case of editing
       }
     })
@@ -69,7 +72,7 @@ export class ProductFormComponent implements OnInit{
 
   ngOnInit(): void {
       this.productForm.valueChanges.pipe(
-        tap(data=>console.log(data))
+        tap(data=>console.log(this.productForm))
       ).subscribe()
   }
   reset(){

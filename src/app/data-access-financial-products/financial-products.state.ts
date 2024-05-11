@@ -50,7 +50,7 @@ export class FinancialProductsState {
     this.state.update((state) => ({ ...state, loading: true }))
     this.financialProductsService.get().subscribe({
       next: (products) => {
-        this.state.update((state) => ({ ...state, products, loading: false, loaded: true }))
+        this.state.update((state) => ({ ...state, products: products.map(prod=>({...prod,date_release: prod.date_release.split('T')[0], date_revision: prod.date_revision.split('T')[0]})), loading: false, loaded: true }))
         
       },
       error: (err) => {
@@ -66,7 +66,8 @@ export class FinancialProductsState {
       next: (updatedProduct) => {
         this.state.update((state) => ({
           ...state,
-          products: state.products.map(product => product.id === updatedProduct.id ? { ...updatedProduct } : product),
+          products: state.products.map(product => product.id === updatedProduct.id ? { ...updatedProduct, date_release: updatedProduct.date_release.split('T')[0],
+        date_revision: updatedProduct.date_revision.split('T')[0] } : product),
           loading: false, loaded: true
         }));
         this.router.navigateByUrl('/')

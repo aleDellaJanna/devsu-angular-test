@@ -62,12 +62,6 @@
 
         <button devsu-button buttonType="default" [btnDisabled]="productForm.invalid"  type="submit" [disabled]="productForm.invalid" >Enviar</button>
     </div>
-    <div>
-        @if (productForm) {
-
-            {{ productForm.controls['date_release'].errors}}
-        }
-    </div>
 </form>
 </div>
 
