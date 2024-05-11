@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ModalUiComponent } from '../ui-design-system/modal/modal.ui-component';
 import { ButtonUiComponent } from '../ui-design-system/button-ui.component';
@@ -10,6 +10,8 @@ import { ButtonUiComponent } from '../ui-design-system/button-ui.component';
   imports: [CommonModule, ModalUiComponent, ButtonUiComponent],
   templateUrl: './delete-modal.ui-component.html',
   styleUrls: ['./delete-modal.ui-component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
+
 })
 export class DeleteModalUiComponent {
   @Output() public readonly approve = new EventEmitter();

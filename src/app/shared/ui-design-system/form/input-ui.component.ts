@@ -1,5 +1,5 @@
 import { CommonModule } from "@angular/common";
-import { Component, HostBinding, signal } from "@angular/core";
+import { ChangeDetectionStrategy, Component, HostBinding, signal } from "@angular/core";
 
 @Component({
     selector: 'input[devsu-input]',
@@ -8,6 +8,7 @@ import { Component, HostBinding, signal } from "@angular/core";
     template: `
     <ng-content class="input"></ng-content>
 `,
+changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InputUiComponent {
     public type = signal<'text' | 'date'>('text');

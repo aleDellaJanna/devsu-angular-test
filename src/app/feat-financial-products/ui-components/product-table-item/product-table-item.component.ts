@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, HostListener, Input, Output, inject, input, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostListener, Input, Output, inject, input, signal } from '@angular/core';
 import { FinancialProduct } from '../../../type-database/financial-product.type';
 import { DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
@@ -9,6 +9,7 @@ import { RouterLink } from '@angular/router';
   imports: [DatePipe, RouterLink],
   templateUrl: './product-table-item.component.html',
   styleUrl: './product-table-item.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductTableItemComponent {
   product = input.required<FinancialProduct>();

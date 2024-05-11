@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, effect, inject, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, effect, inject, input } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import {  FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { InputUiComponent } from '../../../shared/ui-design-system/form/input-ui.component';
@@ -14,7 +14,8 @@ import { dateValidator } from '../../../util-form-validators/min-date.validator'
   standalone: true,
   imports: [ReactiveFormsModule, InputUiComponent, ButtonUiComponent, JsonPipe],
   templateUrl: './product-form.component.html',
-  styleUrl: './product-form.component.scss'
+  styleUrl: './product-form.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush //Should be changed to Default if using a formArray dynamic.
 })
 export class ProductFormComponent {
   private readonly fb = inject(FormBuilder);

@@ -1,8 +1,8 @@
 import { Injectable, computed, effect, inject, signal } from '@angular/core';
 import { FinancialProduct } from '../type-database/financial-product.type';
 import { FinancialProductsService } from './financial-products.service';
-import { Subject } from 'rxjs';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { Subject, tap } from 'rxjs';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 export interface State {
@@ -36,12 +36,12 @@ export class FinancialProductsState {
 
   constructor() {
     this.getFinancialProducts(); //Will only execute ocne;
-    effect(() => {
-      const refectch = this.reftechProducts();
-      if (refectch) {
-        this.getFinancialProducts()
-      }
+    this.refetch.pipe(
+      takeUntilDestroyed()
+    ).subscribe({
+      next: ()=>this.getFinancialProducts()
     })
+
   }
 
 
@@ -49,12 +49,15 @@ export class FinancialProductsState {
   public getFinancialProducts() {
     this.state.update((state) => ({ ...state, loading: true }))
     this.financialProductsService.get().subscribe({
-      next: (products) => this.state.update((state) => ({ ...state, products, loading: false, loaded: true })),
+      next: (products) => {
+        this.state.update((state) => ({ ...state, products, loading: false, loaded: true }))
+        
+      },
       error: (err) => {
         console.log("Error:", err);
         this.state.update((state) => ({ ...state, loading: false, error: 'Error al obtener los productos', loaded: false }))
       }
-    })
+    });
   }
 
   public updateProduct(product: FinancialProduct) {
@@ -63,7 +66,7 @@ export class FinancialProductsState {
       next: (updatedProduct) => {
         this.state.update((state) => ({
           ...state,
-          products: state.products.map(product => product.id === updatedProduct.id ? { ...product } : product),
+          products: state.products.map(product => product.id === updatedProduct.id ? { ...updatedProduct } : product),
           loading: false, loaded: true
         }));
         this.router.navigateByUrl('/')
@@ -72,6 +75,11 @@ export class FinancialProductsState {
         this.state.update((state) => ({ ...state, loading: false, error: 'Error al actualizar el productos', loaded: false }))
       }
     })
+    setTimeout(() => {
+      
+      console.log(this.state())
+    }, 500);
+
   }
 
   public deleteProduct(deleteProduct: FinancialProduct) {

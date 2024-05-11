@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
     standalone: true,
     imports: [CommonModule],
     encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     template: `  <ng-content></ng-content>
     `,
     styles: [`

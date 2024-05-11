@@ -1,5 +1,5 @@
 import { CommonModule } from "@angular/common";
-import { Component, HostBinding, signal } from "@angular/core";
+import { ChangeDetectionStrategy, Component, HostBinding, signal } from "@angular/core";
 
 @Component({
     selector: 'select[devsu-select]',
@@ -8,6 +8,8 @@ import { Component, HostBinding, signal } from "@angular/core";
     template: `
     <ng-content></ng-content>
 `,
+changeDetection: ChangeDetectionStrategy.OnPush
+
 })
 export class SelectUiComponent {
 

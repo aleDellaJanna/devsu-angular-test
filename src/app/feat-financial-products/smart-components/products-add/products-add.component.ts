@@ -24,8 +24,10 @@ export class ProductsAddComponent {
   save(product: FinancialProduct){
     this.financialProductService.createProduct(product).subscribe(
       ({
-        next: (val)=>{this.financialProductState.refetch.next();
-          this.router.navigateByUrl('/')
+        next: (val)=>{
+          // console.log(val)
+          this.router.navigateByUrl('/');
+          this.financialProductState.refetch.next(); //Another way to update silbings
         },
         error: (err)=>{
           this.error.set(err.message)}

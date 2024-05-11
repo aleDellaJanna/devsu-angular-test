@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, input, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { InputUiComponent } from '../../../shared/ui-design-system/form/input-ui.component';
 
@@ -7,7 +7,8 @@ import { InputUiComponent } from '../../../shared/ui-design-system/form/input-ui
   standalone: true,
   imports: [FormsModule, InputUiComponent],
   templateUrl: './search-bar.component.html',
-  styleUrl: './search-bar.component.scss'
+  styleUrl: './search-bar.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchBarComponent {
   @Input() searchTerm: string = '';
