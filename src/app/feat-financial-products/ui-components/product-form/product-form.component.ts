@@ -16,9 +16,9 @@ import { tap } from 'rxjs';
   imports: [ReactiveFormsModule, InputUiComponent, ButtonUiComponent, JsonPipe],
   templateUrl: './product-form.component.html',
   styleUrl: './product-form.component.scss',
-  // changeDetection: ChangeDetectionStrategy.OnPush //Should be changed to Default if using a formArray dynamic.
+  changeDetection: ChangeDetectionStrategy.OnPush //Should be changed to Default if using a formArray dynamic.
 })
-export class ProductFormComponent implements OnInit{
+export class ProductFormComponent{
   private readonly fb = inject(FormBuilder);
   private readonly financialProductService = inject(FinancialProductsService);
 
@@ -43,17 +43,12 @@ export class ProductFormComponent implements OnInit{
       const product = this.product();
       if(product){
         const {id, name, description, logo, date_release, date_revision}  = product;
-        this.productForm.patchValue({
-          id,
-          name,
-          description,
-          logo,
-          date_release:  new Date(date_release).toISOString().split('T')[0],
-          date_revision
-        })
+        this.setProductForm()
         this.productForm.get('data_release')?.removeValidators(dateValidator)
         // this.productForm.get('dat_revision')?.setValue(date_revision)
-        // this.productForm.controls['id'].removeAsyncValidators(idAvailableValidator(this.financialProductService))
+        this.productForm.controls['id'].removeAsyncValidators(idAvailableValidator(this.financialProductService))
+        this.productForm.controls['id'].removeValidators(Validators.required)
+
         this.productForm.get('id')?.disable(); //Disable id in case of editing
       }
     })
@@ -70,13 +65,15 @@ export class ProductFormComponent implements OnInit{
   }
 
 
-  ngOnInit(): void {
-      this.productForm.valueChanges.pipe(
-        tap(data=>console.log(this.productForm))
-      ).subscribe()
-  }
+
   reset(){
-    this.productForm.reset();
+
+    if(this.product()){
+      this.setProductForm();
+    }else{
+      this.reset()
+    }
+
   }
 
   submit(){
@@ -85,6 +82,16 @@ export class ProductFormComponent implements OnInit{
       this.formSubmited.emit(product);
     }
   }
-
+  private setProductForm(){
+    const {id, name, description, logo, date_release, date_revision}  = this.product()!;
+    this.productForm.patchValue({
+      id,
+      name,
+      description,
+      logo,
+      date_release:  new Date(date_release).toISOString().split('T')[0],
+      date_revision
+    })
+  }
 
 }

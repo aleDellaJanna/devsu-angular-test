@@ -58,9 +58,9 @@
 
     </div>
     <div class="btns-container">
-        <button devsu-button buttonType="light" [btnDisabled]="productForm.pristine" [disabled]="productForm.pristine || idTaken()==='PENDING'" (click)="reset()">Reiniciar</button>
-
-        <button devsu-button buttonType="default" [btnDisabled]="productForm.invalid"  type="submit" [disabled]="productForm.invalid" >Enviar</button>
+        
+        <button devsu-button buttonType="light" [btnDisabled]="productForm.pristine" [disabled]="productForm.pristine || idTaken()==='PENDING'" (click)="reset()" type="button">Reiniciar</button>
+        <button devsu-button buttonType="default" [btnDisabled]="productForm.invalid || idTaken()==='PENDING' || productForm.pristine"  type="submit" [disabled]="productForm.invalid ||  productForm.pristine || idTaken()==='PENDING'" >Enviar</button>
     </div>
 </form>
 </div>

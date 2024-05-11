@@ -29,6 +29,7 @@ export class ProductsDetailComponent {
   constructor(){
     effect(()=>{
       if(!this.product()){
+          console.log("NAvegando")
           this.router.navigateByUrl('/'); //Navigate root if no product found or not loaded
       }
     })
