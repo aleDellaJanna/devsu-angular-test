@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, effect, inject, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, effect, inject, input } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import {  FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { InputUiComponent } from '../../../shared/ui-design-system/form/input-ui.component';
@@ -8,6 +8,7 @@ import { FinancialProduct } from '../../../type-database/financial-product.type'
 import { ButtonUiComponent } from '../../../shared/ui-design-system/button-ui.component';
 import { JsonPipe } from '@angular/common';
 import { dateValidator } from '../../../util-form-validators/min-date.validator';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'product-form',
@@ -15,9 +16,9 @@ import { dateValidator } from '../../../util-form-validators/min-date.validator'
   imports: [ReactiveFormsModule, InputUiComponent, ButtonUiComponent, JsonPipe],
   templateUrl: './product-form.component.html',
   styleUrl: './product-form.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush //Should be changed to Default if using a formArray dynamic.
+  // changeDetection: ChangeDetectionStrategy.OnPush //Should be changed to Default if using a formArray dynamic.
 })
-export class ProductFormComponent {
+export class ProductFormComponent implements OnInit{
   private readonly fb = inject(FormBuilder);
   private readonly financialProductService = inject(FinancialProductsService);
 
@@ -36,29 +37,41 @@ export class ProductFormComponent {
   dateReleaseChanged = toSignal(this.productForm.controls['date_release'].valueChanges)
   
   constructor() {
+
     this.productForm.get('date_revision')?.disable();
-    effect(() => {
-      if(this.product()){
-        const {id, name, description, logo, date_release, date_revision}  = this.product()!;
+    effect(()=>{
+      const product = this.product();
+      if(product){
+        const {id, name, description, logo, date_release, date_revision}  = product;
         this.productForm.patchValue({
           id,
           name,
           description,
           logo,
-          date_release: new Date(date_release).toISOString().split('T')[0],
-          date_revision
+          date_release:  new Date(date_release).toISOString().split('T')[0],
+          date_revision: new Date(date_revision).toISOString().split('T')[0]
         })
         this.productForm.get('id')?.disable(); //Disable id in case of editing
       }
-      if (this.dateReleaseChanged()) {
+    })
+    effect(() => {
+      const dataReleaseChanged = this.dateReleaseChanged();
+      if (dataReleaseChanged) {
         const releaseDate = new Date(this.productForm.get('date_release')?.getRawValue());
         const oneYearAhead = new Date(releaseDate.getFullYear() + 1, releaseDate.getMonth(), releaseDate.getDate()+1);
         this.productForm.controls['date_revision'].setValue(oneYearAhead.toISOString().split('T')[0])
       }
+
+
     })
   }
 
 
+  ngOnInit(): void {
+      this.productForm.valueChanges.pipe(
+        tap(data=>console.log(data))
+      ).subscribe()
+  }
   reset(){
     this.productForm.reset();
   }

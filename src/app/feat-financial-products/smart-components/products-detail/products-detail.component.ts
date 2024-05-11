@@ -1,4 +1,4 @@
-import { Component, computed, effect, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map, switchMap, tap } from 'rxjs';
@@ -13,7 +13,8 @@ import { FinancialProduct } from '../../../type-database/financial-product.type'
   standalone: true,
   imports: [ProductFormComponent, JsonPipe],
   templateUrl: './products-detail.component.html',
-  styleUrl: './products-detail.component.scss'
+  styleUrl: './products-detail.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductsDetailComponent {
   private readonly activatedRoute = inject(ActivatedRoute);

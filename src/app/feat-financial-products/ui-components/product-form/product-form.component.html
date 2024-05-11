@@ -45,7 +45,7 @@
         }
     </div>
     <div class="control-wrapper">
-        <span>Fecha de Liberacion {{productForm.controls['date_release'].value}}</span>
+        <span>Fecha de Liberacion</span>
         <input devsu-input formControlName="date_release" type="date" />
         @if( !productForm.controls['date_release'].valid && (productForm.controls['date_release'].dirty
         || form.submitted) ){
@@ -60,7 +60,14 @@
     <div class="btns-container">
         <button devsu-button buttonType="light" [btnDisabled]="productForm.pristine" [disabled]="productForm.pristine || idTaken()==='PENDING'" (click)="reset()">Reiniciar</button>
 
-        <button devsu-button buttonType="default"   [btnDisabled]="productForm.invalid"  type="submit" [disabled]="productForm.invalid || idTaken()==='PENDING'" >Enviar</button>
+        <button devsu-button buttonType="default" [btnDisabled]="productForm.invalid"  type="submit" [disabled]="productForm.invalid" >Enviar</button>
+    </div>
+    <div>
+        @if (productForm) {
+
+            {{ productForm.controls['date_release'].errors}}
+        }
     </div>
 </form>
 </div>
+
