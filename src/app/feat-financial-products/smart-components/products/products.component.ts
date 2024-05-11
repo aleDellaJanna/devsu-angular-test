@@ -41,10 +41,6 @@ export class ProductsComponent {
   protected totalProducts = computed(() => this.products().length);
   protected displayItems = computed(() => this.itemsPerPage() * this.pageIndex() <= this.totalProducts() ? this.itemsPerPage() * this.pageIndex() : this.totalProducts())
 
-  constructor() {
-    this.fincialProductsState.getFinancialProducts();
-  }
-
   private readonly viewModel = computed(() => {
     const products = this.products();
     const searchTerm = this.searchTerm().toLowerCase();

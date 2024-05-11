@@ -15,7 +15,9 @@ export interface State {
   providedIn: 'root'
 })
 export class FinancialProductsState {
-
+  public refetch = new Subject<void>(); //Can be used from components to trigger refetch.
+  private readonly reftechProducts = toSignal(this.refetch);
+  
   private readonly financialProductsService = inject(FinancialProductsService);
   private router = inject(Router);
   //fincialProducState
@@ -32,11 +34,11 @@ export class FinancialProductsState {
   public loaded = computed(() => this.state().loaded);
   public loading = computed(() => this.state().loading);
 
-  public refetch = new Subject<void>(); //Can be used from components to trigger refetch.
-  private readonly refetchSignal = toSignal(this.refetch);
   constructor() {
+    this.getFinancialProducts(); //Will only execute ocne;
     effect(() => {
-      if (this.refetchSignal()) {
+      const refectch = this.reftechProducts();
+      if (refectch) {
         this.getFinancialProducts()
       }
     })
